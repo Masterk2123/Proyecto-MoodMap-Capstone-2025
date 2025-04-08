@@ -12,7 +12,7 @@ import ChatScreen from '@/screens/chatbot/ChatScreen';
 {/*mostrar en pantalla*/}
 export default function TabOneScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <ChatScreen/>
     </View>
   );
