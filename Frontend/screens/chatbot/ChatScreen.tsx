@@ -1,9 +1,13 @@
+//C:\Users\fabio\OneDrive\Escritorio\Proyecto-APT\Frontend\screens\chatbot\ChatScreen.tsx
+
 import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput, Platform, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import { styles as headerStyles } from '../../styles/header.styles';
 import { styles as chatStyles } from '../../styles/chat.styles';
 import { FontAwesome } from '@expo/vector-icons';
 import { styles } from '@/styles/login.styles';
+
+{/* FUNCIONES DE CHAT*/}
 
 export default function NeoChat() {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -15,26 +19,51 @@ export default function NeoChat() {
     return `${hours}:${minutes}`;
   };
 
+{/*weaas del bot*/ }
+
+  // Mensaje inicial (bot)
   const [messages, setMessages] = useState([
     { from: 'bot', text: 'Hola, ¿en qué puedo ayudarte?', time: fecha(new Date()) },
   ]);
 
+{/* weaas del usuario */}
+
+  // Almacenar el mensaje del usuario
   const [userMessage, setUserMessage] = useState('');
 
-  const enviar = () => {
-    if (userMessage.trim()) {
-      const now = new Date();
-      setMessages(prev => [...prev, {
-        from: 'user',
-        text: userMessage,
-        time: fecha(now)
-      }]);
-      setUserMessage('');
+  const manejoInput = (text: string) => {
+    setUserMessage(text);
+  };  
+
+  // Enviar el mensaje del usuario
+  const enviar = async () => {
+    if (userMessage.trim() === '') return; // No enviar mensajes vacíos
+
+    // Agregar el mensaje del usuario a la lista de mensajes
+    console.log("Enviando a backend:", userMessage);
+
+    try {
+      //IMPORTANTE: colocar ip local del computador
+      const response = await fetch('http://192.168.0.7:8080/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: userMessage}),
+      });
+
+      const data = await response.text();
+        console.log("respuesta backend", data);
+        } 
+      catch (error) {
+        // Manejo de errores
+        console.error("Error al conectar con backend", error);
+      }
+
+      setUserMessage(''); // Limpiar el campo de entrada
     }
-  };
 
-  const manejoInput = (text: string) => setUserMessage(text);
-
+  // Manejo del scroll para auto-scroll
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const isAtBottom = layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;

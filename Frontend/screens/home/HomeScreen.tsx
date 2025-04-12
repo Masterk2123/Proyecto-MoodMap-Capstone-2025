@@ -35,14 +35,14 @@ const Home = () => {
 
       {/* Tarjeta 3 */}
       <TouchableOpacity style={styles.card}>
-        <ImageBackground source={require('../../assets/images/fondo1.png')} style={styles.cardOrange} imageStyle={{ borderRadius: 16 }}>
+        <ImageBackground source={require('../../assets/images/fondo3.png')} style={styles.cardOrange} imageStyle={{ borderRadius: 16 }}>
           <Text style={styles.cardTitle}>Lista de{"\n"} Tareas</Text>
         </ImageBackground>
       </TouchableOpacity>
 
       {/* Tarjeta 4 */}
       <TouchableOpacity style={styles.card}>
-        <ImageBackground source={require('../../assets/images/fondo3.png')} style={styles.cardOrange} imageStyle={{ borderRadius: 16 }}>
+        <ImageBackground source={require('../../assets/images/fondo1.png')} style={styles.cardOrange} imageStyle={{ borderRadius: 16 }}>
           <Text style={styles.cardTitle}>Tipos de{"\n"}Ejercicios</Text>
         </ImageBackground>
       </TouchableOpacity>
