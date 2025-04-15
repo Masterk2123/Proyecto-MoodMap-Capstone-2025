@@ -13,7 +13,7 @@ import ChatScreen from '@/screens/chatbot/ChatScreen';
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <ChatScreen/>
+      <Login/>
     </View>
   );
 }
