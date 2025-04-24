@@ -1,3 +1,5 @@
+//C:\Users\fabio\OneDrive\Escritorio\Proyecto-APT\Frontend\app\_layout.web.tsx
+
 import { useEffect } from 'react';
 import { Slot } from 'expo-router';
 
