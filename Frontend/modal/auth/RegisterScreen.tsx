@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { login } from '../../services/authServices'; // Ajusta la ruta si es necesario
-import { styles } from '../../styles/login.styles'; // Asegúrate que esté correcto el path
+import { register } from '../../services/authServices'; // Ajusta la ruta si es distinta
+import { styles } from '../../styles/login.styles'; // Tu archivo de estilos personalizado
 import { useRouter } from 'expo-router';  // Importa useRouter desde expo-router
-import Home from '../home/HomeScreen';
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter(); // Inicializa el router
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
-      const data = await login(email, password);
-      setMessage('Inicio de sesión exitoso.');
-      console.log('Login exitoso:', data);
-  
+      const data = await register(email, password);
+      setMessage(`¡Usuario registrado con ID: ${data.id}!`);
+      console.log('Registro exitoso:', data);
+
       // Redirigir a la pantalla principal después de iniciar sesión
       router.replace('/(tabs)/Home'); 
     } catch (error: unknown) {
@@ -46,14 +45,14 @@ const LoginScreen = () => {
           <Text style={styles.Label}>Contraseña</Text>
           <TextInput
             style={styles.Input}
-            placeholder="Tu contraseña"
+            placeholder="Contraseña segura"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
           />
 
-          <TouchableOpacity style={styles.Button} onPress={handleLogin}>
-            <Text style={styles.ButtonText}>Iniciar sesión</Text>
+          <TouchableOpacity style={styles.Button} onPress={handleRegister}>
+            <Text style={styles.ButtonText}>Registrarse</Text>
           </TouchableOpacity>
 
           {message !== '' && <Text style={styles.Text}>{message}</Text>}
@@ -63,4 +62,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

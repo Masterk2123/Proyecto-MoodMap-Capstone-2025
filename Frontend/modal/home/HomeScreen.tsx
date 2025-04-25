@@ -4,10 +4,12 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet,
          SafeAreaView, ImageBackground, useWindowDimensions } from 'react-native';
 import { createResponsiveStyles } from '../../styles/home.styles';
+import { useRouter } from 'expo-router'; // ← Importa useRouter
 
 const Home = () => {
   const { width } = useWindowDimensions();
   const styles = createResponsiveStyles(width);
+  const router = useRouter(); // ← Inicializa router
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,7 +29,7 @@ const Home = () => {
       </TouchableOpacity>
 
       {/* Tarjeta 2 */}
-      <TouchableOpacity style={styles.card}>
+      <TouchableOpacity style={styles.card} onPress={() => router.push('/(tabs)/Chat')}>
         <ImageBackground source={require('../../assets/images/fondo2.png')} style={styles.cardOrange} imageStyle={{ borderRadius: 16 }}>
           <Text style={styles.cardTitle}>Chat Bot</Text>
         </ImageBackground>

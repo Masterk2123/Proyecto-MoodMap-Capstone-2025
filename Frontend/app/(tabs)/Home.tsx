@@ -1,22 +1,14 @@
-
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 {/* Componente de pantalla principal de la aplicación */}
-import Register from '@/modal/auth/RegisterScreen';
-import Login from '@/modal/auth/LoginScreen';
+import Home from '@/modal/home/HomeScreen';
 
 export default function TabOneScreen() {
   const [isLogin, setIsLogin] = useState(true); 
 
   return (
-    <View style={styles.container}>
-      {isLogin ? <Login /> : <Register />}
-
-      <TouchableOpacity style={styles.switchButton} onPress={() => setIsLogin(!isLogin)}>
-        <Text style={styles.switchText}>
-          {isLogin ? '¿No tienes cuenta? Regístrate aquí' : '¿Ya tienes cuenta? Inicia sesión'}
-        </Text>
-      </TouchableOpacity>
+    <View>
+      <Home />
     </View>
   );
 }
@@ -39,4 +31,3 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
-

@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from 'react-native';
 import EditScreenInfo from '@/components/EditScreenInfo';
+import NeoChat from '@/modal/chatbot/ChatScreen';
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator}/>
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <NeoChat />
     </View>
   );
 }

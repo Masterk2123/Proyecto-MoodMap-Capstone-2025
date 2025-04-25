@@ -1,6 +1,3 @@
-//ruteador de autenticación
-import { Router } from 'express';
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../DB/database');
@@ -13,7 +10,11 @@ exports.registerUser = (req, res) => {
   const query = `INSERT INTO users (email, password) VALUES (?, ?)`;
   db.run(query, [email, hashed], function (err) {
     if (err) {
-      return res.status(400).json({ error: 'Usuario ya existe' });
+      if (err || !user) return res.status(404).json({ error: 'Usuario no encontrado' });
+      if (err.code === 'SQLITE_CONSTRAINT') {
+        return res.status(400).json({ error: 'El correo electrónico ya está en uso' });
+      }
+
     }
     res.json({ id: this.lastID, email });
   });
